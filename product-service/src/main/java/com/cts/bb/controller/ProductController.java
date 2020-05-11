@@ -30,7 +30,7 @@ public class ProductController {
 	
 	//to get all the list of products  
 	@GetMapping
-	@HystrixCommand(fallbackMethod="fallBack1")
+	@HystrixCommand(fallbackMethod="ListOfProduct_FallBack")
 	public ResponseEntity<Object> fetchProductList()
 	{
 		//logging
@@ -54,12 +54,11 @@ public class ProductController {
 
 	//to get the product by product-id
 	@GetMapping("/{id}")
-	@HystrixCommand(fallbackMethod="fallBack2")
+	@HystrixCommand(fallbackMethod="ListOfProductByID_FallBack")
 	public ResponseEntity<Object> fetchProductById(@PathVariable int id)
 	{//logging
 		String methodName = "fetchProductById()";
 		logger.info(methodName+" called");
-		service.fetchProductById(id);
 		return new ResponseEntity<>(service.fetchProductById(id), HttpStatus.OK); 
 
 	}
@@ -86,11 +85,18 @@ public class ProductController {
 	
 	
 	
-	public ResponseEntity<Object> fallBack1(){
+	public ResponseEntity<Object> ListOfProduct_FallBack()
+	{	//logging
+		  String methodName = "ListOfProduct_FallBack()";
+	   	  logger.info(methodName+" called");
 		return new ResponseEntity<>(service.fetchProductList(), HttpStatus.OK);
 	}
 	
-	public ResponseEntity<Object> fallBack2(@PathVariable("id") int id){
+	public ResponseEntity<Object> ListOfProductByID_FallBack(@PathVariable("id") int id) throws InterruptedException
+	{//logging
+		String methodName = "ListOfProductByID_FallBack()";
+	   	logger.info(methodName+" called");
+	   	Thread.sleep(4000);
 		return new ResponseEntity<>("Fallback", HttpStatus.OK);
 	}
 
