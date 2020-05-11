@@ -1,6 +1,7 @@
 package com.cts.bb;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
@@ -33,7 +34,7 @@ public class ProductListApplicationTests {
 	@MockBean
 	private ProductRepository repo;
 	
-	//Working
+	//test for  fetchProductList
 	@Test
 	public void fetchProductListTest()
 	{
@@ -42,23 +43,26 @@ public class ProductListApplicationTests {
 		assertEquals(2, service.fetchProductList().size());
 	}
 	
+	
 	//Working
+	//test for saveProductToDB
 	@Test
 	public void saveProductToDBTest() throws Exception
 	{
 		Product product=new Product(1,"Card","Payments",100000);
         when(repo.save(product)).thenReturn(product);
+        equals(repo.save(product));
+
 
 	}
+	
+	//test for fetchProductById
 	@Test
 	public void fetchProductByIdTest() 
 	{   
 		Product product=new Product(1,"For NA","KeyBoard",3000);
         when(repo.findById(product.getProductId())).thenReturn(Optional.of(product)).getMock();
+        assertEquals(1, product.getProductId());
+
     }
 	
-
- 
-	
-	
-}
