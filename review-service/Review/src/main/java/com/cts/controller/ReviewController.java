@@ -3,6 +3,9 @@ package com.cts.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.midi.SysexMessage;
+
+import org.aspectj.bridge.Message;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +34,7 @@ public class ReviewController {
 	
 	// to get All the reviews.
 	@GetMapping
+	@HystrixCommand(fallbackMethod="ListOfReview_FallBack")
 	public List<Review> fetchReviewList()
 	{//logging
 		String methodName = "fetchReviewList()";
@@ -58,12 +62,29 @@ public class ReviewController {
 
 	//Fetch all review from productId
 	@GetMapping("/{productId}")
-	public List<Review> fetchReviewById(@PathVariable int productId)
+	@HystrixCommand(fallbackMethod="ListOfReviewByID_FallBack")
+	public ResponseEntity<Object> fetchReviewById(@PathVariable int productId)
 	{//logging
 		String methodName = "fetchReviewById()";
 		logger.info(methodName+" called");
 		
-		return  service.fetchReviewById(productId);
+		return  new ResponseEntity<>(service.fetchReviewById(productId),HttpStatus.OK);
 	}
+
+	
+	public List<Review> ListOfReview_FallBack()
+	{	//logging
+		  String methodName = "ListOfReview_FallBack()";
+	   	  logger.info(methodName+" called");
+		return service.fetchReviewList();
+	}
+	
+	public ResponseEntity<Object> ListOfReviewByID_FallBack(@PathVariable("id") int id) throws InterruptedException
+	{//logging
+		String methodName = "ListOfReviewByID_FallBack()";
+	    logger.info(methodName+" called");
+	    Thread.sleep(4000);
+      	 return new ResponseEntity<>("Fallback",HttpStatus.OK);
+	}		
 
 }
