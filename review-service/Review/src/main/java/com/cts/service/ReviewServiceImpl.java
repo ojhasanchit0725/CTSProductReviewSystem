@@ -57,7 +57,15 @@ public class ReviewServiceImpl implements IReviewService{
 	{	//logging
 		String methodName = "fetchReviewByIdService()";
 		logger.info(methodName+" called");	 
-		return repo.findById(productId);
+
+		List<Review> result=this.repo.findById(productId);
+		if (result == null || result.isEmpty()) {
+		    throw new ReviewNotFoundException("Product ID : " + productId + " Not Found");
+		}
+		else {
+			return result;
+		}
+
 			
 	}
 	
