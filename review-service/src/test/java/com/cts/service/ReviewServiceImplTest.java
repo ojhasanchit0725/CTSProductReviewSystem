@@ -1,4 +1,4 @@
-package com.cts;
+package com.cts.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +23,7 @@ import com.cts.service.ReviewServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReviewApplicationTests 
+public class ReviewServiceImplTest 
 {
 	@Autowired
 	ReviewServiceImpl service;

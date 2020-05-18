@@ -21,6 +21,6 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		ExceptionResponse er= new ExceptionResponse(new Date(),ex.getMessage(),request.getDescription(false));
 	
 	return new ResponseEntity(er,HttpStatus.NOT_FOUND);
-	}
+	}																					
 	
 }
