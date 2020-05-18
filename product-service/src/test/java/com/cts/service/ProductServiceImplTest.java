@@ -1,4 +1,4 @@
-package com.cts.bb;
+package com.cts.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +26,7 @@ import com.cts.bb.service.ProductServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductListApplicationTests {
+public class ProductServiceImplTest {
 
 	@Autowired
 	private ProductServiceImpl service;
@@ -66,38 +66,7 @@ public class ProductListApplicationTests {
 
     }
 	
-	//Working
-//	@Test
-//	public void fetchProductByIdTest() 
-//	{  int id=3;
-//	assertEquals(1, service.fetchProductById(1));
-//		repo.findById(product.getProductId());
-//		assertEquals("By id get name",product.getName());
-//	when(repo.findById(1)).thenReturn(Stream.of(new Product(100,"USBcable","For Charging",1000),new Product(200,"Adapter","For Cable",2000)).collect(Collectors.toList()));
-//	assertEquals(1, service.fetchProductById(id));
-//
-//	}
-//	@Test
-//	public void fetchProjectByIdTest() 
-//	{   	Product product=new Product(2,"Mi Watch","sa",100);
-//
-//        when(repo.findById(product.getProductId())).thenReturn(Optional.of(product)).getMock();
-//	}
-	
-	//Working
-//	@Test
-//	@DirtiesContext
-//	public void deleteProductByIdTest()
-//	{	
-//		Product product=new Product(3,"Smart Watch","FitBand",2300);
-////        when(repo.deleteById(product.getProductId()));
-//		service.deleteProductById(product.getProductId());
-//    	verify(repo,times(1)).deleteById(product.getProductId());
-////		service.deleteProductById(product.getPid());
-////		verify(repo,times(1)).deleteById(product.getPid());
-////repo.deleteById(6);
-////assertNull(repo.findById(6));
-//	}
+
  
 	
 	
